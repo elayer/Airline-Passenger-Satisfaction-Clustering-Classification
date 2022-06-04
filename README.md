@@ -9,9 +9,8 @@ identified customer segments for marketing and business decision purposes.
 
 * Created an API for potential clients using Flask (picture of an example input of data included).
 
-* <b>UPDATE:</b> I recently uploaded and included results when implementing artifical data using SMOTE. Using this algorithm greatly enchanced evaluation metrics, but in a practical setting, we have to keep in mind this is artificial data and may not be completely representtative of real-world data. The current flask still uses the CatBoost model without SMOTE.
-
-The pickled model containing the SMOTE balanced data of the CatBoost Classifier is too large to upload to GitHub (44MB). Therefore, that model will have to remain local for the time being. If you would like access to the model file, feel free to contact me.
+* NOTE: I did not collect or generate this data personally. The data used for this project comes from Kaggle at the following link:
+https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction
 
 
 ## Code and Resources Used:

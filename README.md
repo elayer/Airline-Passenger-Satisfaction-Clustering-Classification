@@ -96,6 +96,4 @@ I lasted created a Flask API hosted on a local webserver. For this step I primar
 ![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/fetal_prediction.png "Website Prediction Page")
 
 ## Future Improvements
-In the case we do not wish to use artificial data, we can simply remove the SMOTE implementation and stratify the dependent variable when splitting the data into train and test sets. From here, we can run the same models knowing the data is genuine.
-
-5/27/2022: Applying LDA using scaled data instead of unscaled data.
+If I'm able to return to this project, I would like to create a Flask API with both clustering and classification models as a customer review assignment tool which could serve as a means to continuously append records to the existing clusters as well as for the classification model to further discern a customer's satisfaction level.

@@ -42,43 +42,42 @@ Those traveling for business purposes seemed to be more likely to leave poorer r
 ![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/eda_flight_satisfaction_class.png "Class Satisfaction")
 ![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/catboost-roc_updated.png "CatBoost ROC AUC Score")
 
+## Clustering / Customer Segmentation
+In addition to building classifiers for this data, I wanted to also attempt to split these reviews into potential customer segments to identify areas of marketing efforts and understand what certain customers are satisfied and dissatisfied with. I used the UMAP dimensionality reduction technique over PCA since PCA required about 11 components to retain 80% of the variance in the data. 
+
+Following this, I juxtaposed the performances of K-Means and DBSCAN on the components. Since the shapes returned from reducing the dimensionality to 2 resulted in more peculiarly shaped clusters rather than simple spheres, DBSCAN did a better job differentiating between the clusters formed. 
+
+I'll also include a visual depicting the two UMAP components formed when reducing the dimensionality of the whole dataset to 2 components:
+
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/umap_2_comps.png "UMAP Components")
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/umap_kmeans.png "K-Means Applied")
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/umap_dbscan.png "DBSCAN Applied")
+
+
 ## Model Building
-Before building any models, I included the linear discriminants from my LDA application as well as clusters created from applying KMeans Clustering to the dataset as new features. I then scaled the data using MinMaxScaler for the Support Vector Machine implementation, and StandardScaler for all other models attempted. 
+Before I starting building any model, I resplit the data into training and test sets for the sole purpose of ensuring the target variable was evenly distributed among both sets.
 
-* I began model testing with the Support Vector Machine, since we are interested in creating an optimal class seperability, and then attempted K-Nearest Neighbors and Logistic Regression to compare it with these different algorithms. Oddly enough, the models performed better without stratification, but in practice, it may be more beneficial and conducive to practicality to stratify the the testing data since there were more normal records than pathological records. 
+As I begun the build classifier models to classify satisfied and dissatisfied records, I first constructed a Logit model using the statsmodels package to see if any attributes were seen as insignificant to that algorithm. It found a few attributes with high p-values (statistically insignificant), which mainly were some of the 1-5 rating variables. <i>Food and drink, Ease of online booking, and Inflight entertainment</i> are a few examples. I believe since these attributes are common among flights no matter what class of seat a passenger sits in, that is why the model deems these attributes as insignificant.
 
-* This then led me to try Random Forest and AdaBoost Classifier in tandem with StratifiedKFold to ensure balanced classes while training. The Random Forest Classifier performed better on all folds.
-
-* I then concluded using optuna with XGBoost and CatBoost Classifiers. As expected, the CatBoost Classifier yielded the best results out of all the models attempted. 
-
-(<i>As a potential point to try in the future, I wonder how well the models would perform if including some newly sampled data to balance the records on the class targets. SMOTE is a potential method to perform this</i>).
+After using the Logit model to investigate attribute significance, I moved into performing different algorithms on the data, being Logistic Regression, KNN, Support Vector Machine, Random Forest, and AdaBoost Classifiers. Each algorithm returned quite strong results, which I will list below.
 
 ## Model Performance
-The Random Forest and CatBoost classifier models had the best two performances, with CatBoost being the top model. These models performed a little better over the previous models of Support Vector Machine, K-Nearest Neighbors, and Logistic Regression Models attempted. Below are the recorded <b>Weighted F1 Scores and Accuracies</b> for each of the models performed:
+Each model build returned strong performance metric values, with Random Forest and AdaBoost Classifier performing the best of all classifiers. Below are the models' accuracy and F1 scores:
 
-* Support Vector Machine F1 Score: 91%, Accuracy: 91.54% --- <i>with SMOTE</i> F1 Score: 96%, Accuracy: 96.46%
+* Logistic Regression) Accuracy: 98.42 | F1 Score: 98.18
 
-* K-Nearest Neighbors F1 Score: 92%, Accuracy: 92.11% --- <i>with SMOTE</i> F1 Score: 98%, Accuracy: 97.91%
+* KNN) Accuracy: 96.74 | F1 Score: 96.16
 
-* Logistic Regression F1 Score: 91%, Accuracy: 90.60% --- <i>with SMOTE</i> F1 Score: 87%, Accuracy: 86.71%
+* Support Vector Machine) Accuracy: 91.12 | F1 Score: 90.76
 
-* Random Forest Classifier F1 Score: 94.40%, Accuracy: 94.40% --- <i>with SMOTE</i> F1 Score: 97.82%, Accuracy: 97.82%
+* Random Forest Classifier) Accuracy: 98.76 | F1 Score: 98.58
 
-* AdaBoost Classifier F1 Score: 84.24%, Accuracy: 84.24% --- <i>with SMOTE</i> F1 Score: 85.80%, Accuracy: 85.80%
+* AdaBoost Classifier) Accuracy: 98.83 | F1 Score: 98.65
 
-* XGBoost Classifier F1 Score: 92.24%, Accuracy: 92% --- <i>with SMOTE</i> F1 Score: 97.48%, Accuracy: 97%
+I also made a ROC AUC curve to compare the models and decide which algorthm performed the "best" on the data.
 
-* CatBoost Classifier F1 Score: 95.06%, Accuracy: 95.06% --- <i>with SMOTE</i> F1 Score: 98.99%, Accuracy: 98.99%
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/auc_curve.png "AUC Curve")
 
-I used Optuna with XGBoost and CatBoost to build an optimized model since these algorthms include a myriad of attributes to test when trying to optimize them (hyperparameters).
-
-## Productionization
-I lasted created a Flask API hosted on a local webserver. For this step I primarily followed the productionization step from the YouTube tutorial series found in the refernces above. This endpoint could be used to access, given cardiotocography exam results, a prediction for whether that pregnancy has normal health conditions or a pathological concern.
-
-<b>UPDATE:</b> Below is an example prediction using the Flask API:
-
-![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/fetal_homepage.png "Website Homepage")
-![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/fetal_prediction.png "Website Prediction Page")
 
 ## Future Improvements
 If I'm able to return to this project, I would like to create a Flask API with both clustering and classification models as a customer review assignment tool which could serve as a means to continuously append records to the existing clusters as well as for the classification model to further discern a customer's satisfaction level.

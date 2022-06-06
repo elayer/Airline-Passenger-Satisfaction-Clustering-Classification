@@ -1,11 +1,10 @@
 ## Airline Passenger Satisfaction Clustering & Classification Project - Overview:
+* This project's goal is to identify factors that lead to flight experience satisfaction, and potentially identify groups of flight experiences with consistent satisfaction scores.
 
-* Created a model as well as customer segments to identify which customers are reviewing their flight experience as satisfactory in addition to using 
-identified customer segments for marketing and business decision purposes.
+* Performed an exploratory data analysis to extract and investigate insights within the data. I managed to find some interesting details of the data, including which customers were more likely to be satisfied with their flight experience. 
 
-* Performed EDA to extract and investigate insights within the data. I managed to find some interesting details of the data, including which customers were more likely to be satisfied with their flight experience. Following this, I thought to also perform clustering techniques on the data to identify if there are any review patterns within the data.
-
-* Following this, I built a classifier model to predict instances of when a person may leave a satisfied review using a myriad of different algorithms.
+* Created classifier models to identify which customers are reviewing their flight experience as satisfactory in addition to using finding customer segments which
+can be used for marketing and business decision purposes.
 
 * NOTE: I did not collect or generate this data personally. The data used for this project comes from Kaggle at the following link:
 https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction

@@ -3,11 +3,9 @@
 * Created a model as well as customer segments to identify which customers are reviewing their flight experience as satisfactory in addition to using 
 identified customer segments for marketing and business decision purposes.
 
-* Engineered new features utilizing Linear Discriminant Analysis and KMeans Clustering. I also performed PCA to orchestrate further and visualize further class separability, but chose not to include the components as features due to the number of components and potential overfitting (<i>could attempt to build new models with them in the future however, if I come back to this project</i>).
+* Performed EDA to extract and investigate insights within the data. I managed to find some interesting details of the data, including which customers were more likely to be satisfied with their flight experience. Following this, I thought to also perform clustering techniques on the data to identify if there are any review patterns within the data.
 
-* Began model building with Support Vector Machine, K-Nearest Neighbors, Logistic Regression, Random Forest Classifier, and AdaBoost Classifier. I then used optuna for hyperparameter optmimization with XGBoost Classifier and CatBoost Classifier.
-
-* Created an API for potential clients using Flask (picture of an example input of data included).
+* Following this, I built a classifier model to predict instances of when a person may leave a satisfied review using a myriad of different algorithms.
 
 * NOTE: I did not collect or generate this data personally. The data used for this project comes from Kaggle at the following link:
 https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction
@@ -17,44 +15,31 @@ https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction
 
 **Python Version:** 3.8.5
 
-**Packages:** numpy, pandas, scipy, matplotlib, seaborn, sklearn, xgboost, catboost, sklearn packages that include but are not limited to: (pca, lda, kmeans, random forest classifier, svm, logisitc regression, various preprocessing and model selection packages), optuna
-
-**Web Framework Requirements Command:** ```pip install -r requirements.txt```
+**Packages:** numpy, pandas, scipy, matplotlib, seaborn, sklearn, uumap, statsmodels
 
 ## References:
 
 * Various project structure and process elements were learned from Ken Jee's YouTube series: 
 https://www.youtube.com/watch?v=MpF9HENQjDo&list=PL2zq7klxX5ASFejJj80ob9ZAnBHdz5O1t
 
-* Wikipedia article concerning cardiotocography exams and information about them: 
-https://en.wikipedia.org/wiki/Cardiotocography#:~:text=Cardiotocography%20(CTG)%20is%20a%20technique,monitoring%20is%20called%20a%20cardiotocograph
-
-* <b>Disclaimer regarding the data:</b> I did NOT scrape or collect this data myself originally. The data used for this project was obtained from Kaggle (source in the following link):
-https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification
+* Article which provided useful information on how to apply UMAP in a supervised manner
+https://towardsdatascience.com/umap-dimensionality-reduction-an-incredibly-robust-machine-learning-algorithm-b5acb01de568
 
 ## Data Cleaning
 
-Since the data was already thoroughly cleaned upon obtaining the dataset, there is very minimal cleaning tasks carried out in this particular project. I did perform some outlier detection, but chose to include any existing outliers as they could be important towards the analysis given the size of the dataset and the integrity of how the data was collected.
+Columns detaling flight delay times contained some missing values. After looking at the distribution of values in these columns and their relation to other variables, I umputed these missing values with 0.
 
 ## EDA
-Some key findings including an example of a test datapoint being classified in using Flask is included below. I noticed that there was a consistent heartrate baseline for pathological records having higher prolonged decelerations. You can then see for higher values of prolonged decelerations (far right column) in the pairplot, there are lower values for accelerations and uterine contractions in general than normal records. 
+While graphing the data, I managed to find some interesting insights primarily regarding the age along with reasons for travel. I was able to illustrate which passengers were more likely to leave satisfied reviews. 
 
-I also include the separation identified by PCA and how these distinctions in the cardiotocography exam metrics can be used to identify whether a datapoint is normal or pathological. In addition, there is also the application of LDA which results in a 2D visual where the three class distinctions can be seen between the linear discriminants. 
+Using displots, it can been seen that regardless of gender, elderly folks traveling for personal reasons are more likely to fly business class. Of course, those traveling for business purposes are as well, but their ages are much more distributed. In addition, generally those who left higher ratings for Inslight Wifi service were more likely to be satisfied with their flight experience.
 
-<b>Update:</b> I include a graph of the ROC AUC Curve scores for the CatBoost Classifier using the SMOTE algorithm data included.
+Those traveling for business purposes seemed to be more likely to leave poorer ratings for flight time convenience. Travelers sitting in business class seats were also more likely to have satisfied flight experiences.
 
-Target Labels can be translated as follows (according to the data source, each record was labelled by three Obstetritians):
-
-<b>1.0 -> Normal</b>
-
-<b>2.0 -> Suspect</b>
-
-<b>3.0 -> Pathological</b>
-
-![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/prolonged-to-baseline.png "Baseline Heartrate to Prolonged Decelerations")
-![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/pairplot-pathological-pattern.png "Pairplot for Pathological Patterns")
-![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/pca-patterns.png "PCA Patterns")
-![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/lda-visual_updated.png "LDA Visual")
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/eda_density_charts.png "Density Charts")
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/satisfied_chart.png "Satisfaction Chart")
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/eda_convenience_chart.png "Flight Convenience")
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/eda_flight_satisfaction_class.png "Class Satisfaction")
 ![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/catboost-roc_updated.png "CatBoost ROC AUC Score")
 
 ## Model Building

@@ -40,7 +40,7 @@ Those traveling for business purposes seemed to be more likely to leave poorer r
 ![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/satisfied_chart.png "Satisfaction Chart")
 ![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/eda_convenience_chart.png "Flight Convenience")
 ![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/eda_flight_satisfaction_class.png "Class Satisfaction")
-![alt text](https://github.com/elayer/Fetal-Health-Classifier-Project/blob/main/catboost-roc_updated.png "CatBoost ROC AUC Score")
+![alt text](https://github.com/elayer/Airline-Passenger-Satisfaction-Clustering-Classification/blob/main/eda_satisfied.png "Wifi Ratings")
 
 ## Clustering / Customer Segmentation
 In addition to building classifiers for this data, I wanted to also attempt to split these reviews into potential customer segments to identify areas of marketing efforts and understand what certain customers are satisfied and dissatisfied with. I used the UMAP dimensionality reduction technique over PCA since PCA required about 11 components to retain 80% of the variance in the data. 
